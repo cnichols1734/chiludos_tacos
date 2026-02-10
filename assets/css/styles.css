@@ -1264,8 +1264,10 @@ button {
 .hours-table tr {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid var(--gray-200);
+  gap: 16px;
 }
 
 .hours-table tr:last-child {
@@ -1276,21 +1278,15 @@ button {
   font-weight: 600;
   color: var(--gray-700);
   font-size: 0.93rem;
+  min-width: 110px;
 }
 
 .hours-table .time {
-  color: var(--gray-500);
-  font-size: 0.93rem;
-}
-
-.hours-table .today {
-  color: var(--red-primary);
-  font-weight: 700;
-}
-
-.hours-table .today .time {
   color: var(--red-primary);
   font-weight: 600;
+  font-size: 0.93rem;
+  white-space: nowrap;
+  text-align: right;
 }
 
 .location__map {

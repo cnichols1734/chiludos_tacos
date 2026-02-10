@@ -230,14 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ---- Highlight Today in Hours ----
-  const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-  const today = days[new Date().getDay()];
-  const todayRow = document.querySelector(`[data-day="${today}"]`);
-  if (todayRow) {
-    todayRow.classList.add('today');
-  }
-
   // ---- Counter Animation for Stats ----
   const counters = document.querySelectorAll('[data-count]');
 
