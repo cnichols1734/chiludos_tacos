@@ -102,6 +102,11 @@ a {
   text-decoration: none;
   color: inherit;
   transition: color var(--transition-fast);
+  touch-action: manipulation;
+}
+
+button {
+  touch-action: manipulation;
 }
 
 ul { list-style: none; }
@@ -197,23 +202,11 @@ button {
   box-shadow: var(--shadow-red);
 }
 
-.btn--primary:hover {
-  background: var(--red-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 14px 44px rgba(178, 34, 34, 0.35);
-}
-
-.btn--outline {
+.btn--outline,
+.btn--outline:visited {
   background: transparent;
-  color: var(--white);
+  color: #FFFFFF;
   border: 2px solid rgba(255,255,255,0.5);
-}
-
-.btn--outline:hover {
-  background: var(--white);
-  color: var(--red-primary);
-  border-color: var(--white);
-  transform: translateY(-2px);
 }
 
 .btn--outline-dark {
@@ -222,22 +215,56 @@ button {
   border: 2px solid var(--red-primary);
 }
 
-.btn--outline-dark:hover {
-  background: var(--red-primary);
-  color: var(--white);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-red);
-}
-
 .btn--white {
   background: var(--white);
   color: var(--red-primary);
   box-shadow: var(--shadow-lg);
 }
 
-.btn--white:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-xl);
+@media (hover: hover) {
+  .btn--primary:hover {
+    background: var(--red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 44px rgba(178, 34, 34, 0.35);
+  }
+
+  .btn--outline:hover {
+    background: var(--white);
+    color: var(--red-primary);
+    border-color: var(--white);
+    transform: translateY(-2px);
+  }
+
+  .btn--outline-dark:hover {
+    background: var(--red-primary);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-red);
+  }
+
+  .btn--white:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+  }
+}
+
+.btn:active {
+  transform: translateY(0);
+  opacity: 0.9;
+}
+
+.cta__actions .btn--outline,
+.cta__actions .btn--outline:visited,
+.cta__actions .btn--outline:link {
+  color: #FFFFFF;
+}
+
+@media (hover: hover) {
+  .cta__actions .btn--outline:hover {
+    color: var(--red-primary);
+    background: var(--white);
+    border-color: var(--white);
+  }
 }
 
 .btn--sm {
@@ -374,10 +401,12 @@ button {
   box-shadow: 0 4px 15px rgba(178, 34, 34, 0.3);
 }
 
-.navbar__cta:hover {
-  background: var(--red-dark);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(178, 34, 34, 0.4);
+@media (hover: hover) {
+  .navbar__cta:hover {
+    background: var(--red-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(178, 34, 34, 0.4);
+  }
 }
 
 .navbar__cta::after {
@@ -452,8 +481,10 @@ button {
   transition: var(--transition-fast);
 }
 
-.mobile-menu a:hover {
-  color: var(--gold-light);
+@media (hover: hover) {
+  .mobile-menu a:hover {
+    color: var(--gold-light);
+  }
 }
 
 /* ---------- Hero Section ---------- */
@@ -651,14 +682,15 @@ button {
 /* ---------- Trust Strip ---------- */
 .trust-strip {
   background: var(--white);
-  padding: 50px 0;
+  padding: 0;
+  position: relative;
   border-bottom: 1px solid var(--gray-100);
 }
 
 .trust-strip__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+  gap: 0;
   text-align: center;
 }
 
@@ -666,47 +698,61 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 24px 16px;
-  border-radius: var(--radius-md);
-  transition: all var(--transition-smooth);
-}
-
-.trust-strip__item:hover {
-  background: var(--red-glow);
-  transform: translateY(-4px);
-}
-
-.trust-strip__icon {
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  background: var(--red-glow);
-  border-radius: var(--radius-md);
-  color: var(--red-primary);
-  font-size: 1.4rem;
-  transition: all var(--transition-smooth);
+  gap: 10px;
+  padding: 44px 20px;
+  position: relative;
 }
 
-.trust-strip__item:hover .trust-strip__icon {
-  background: var(--red-primary);
-  color: var(--white);
+.trust-strip__item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 28%;
+  height: 44%;
+  width: 1px;
+  background: var(--gray-200);
 }
 
 .trust-strip__value {
   font-family: var(--font-display);
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--gray-900);
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--red-primary);
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.trust-strip__star {
+  color: var(--gold);
+  font-size: 0.65em;
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+.trust-strip__pct {
+  font-size: 0.6em;
+  color: var(--red-light);
+  font-weight: 600;
+  vertical-align: super;
+  margin-left: 1px;
+}
+
+.trust-strip__divider {
+  width: 28px;
+  height: 2px;
+  background: var(--red-primary);
+  border-radius: 2px;
+  opacity: 0.35;
 }
 
 .trust-strip__label {
   font-family: var(--font-accent);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--gray-500);
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 /* ---------- About Section ---------- */
@@ -1246,13 +1292,13 @@ button {
 }
 
 .location__block-content p,
-.location__block-content a {
+.location__block-content a:not(.btn) {
   font-size: 0.95rem;
   color: var(--gray-500);
   line-height: 1.7;
 }
 
-.location__block-content a:hover {
+.location__block-content a:not(.btn):hover {
   color: var(--red-primary);
 }
 
@@ -1677,7 +1723,18 @@ button {
 
   .trust-strip__grid {
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+  }
+
+  .trust-strip__item:not(:last-child)::after {
+    display: none;
+  }
+
+  .trust-strip__item {
+    padding: 28px 16px;
+  }
+
+  .trust-strip__value {
+    font-size: 2rem;
   }
 
   .about__grid {
@@ -1756,17 +1813,17 @@ button {
 }
 
 @media (max-width: 480px) {
-  .trust-strip__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
   .trust-strip__item {
-    padding: 16px 8px;
+    padding: 22px 10px;
   }
 
   .trust-strip__value {
-    font-size: 1.3rem;
+    font-size: 1.7rem;
+  }
+
+  .trust-strip__label {
+    font-size: 0.72rem;
+    letter-spacing: 1px;
   }
 
   .hero__logo {
